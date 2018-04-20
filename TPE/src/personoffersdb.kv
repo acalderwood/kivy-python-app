@@ -1,0 +1,74 @@
+
+# ---------- personoffersdb.kv  ----------
+
+# Reference personoffersdb.py
+#: import main personoffersdb
+#: import ListAdapter kivy.adapters.listadapter.ListAdapter
+#: import ListItemButton kivy.uix.listview.ListItemButton
+
+PersonOffersDB:
+
+<PersonOffersDB>:
+    orientation: "vertical"
+    business_name_text_input: business_name
+    points_numeric_input: points
+    price_numeric_input: price
+    person_offers_list: person_offers_list_view
+    padding: 10
+    spacing: 10
+
+    BoxLayout:
+        size_hint_y: None
+        height: "40dp"
+
+        Label:
+            text: "Business"
+        TextInput:
+            id: business_name
+        Label:
+            text: "Points offered"
+        TextInput:
+            id: points
+            input_filter: 'int'
+        Label:
+            text: "Price"
+        TextInput:
+            id: price
+            input_filter: 'float'
+
+    BoxLayout:
+        size_hint_y: None
+        height: "40dp"
+        Button:
+            text: "Submit"
+            size_hint_x: 15
+            on_press: root.submit_offer()
+        Button:
+            text: "Delete"
+            size_hint_x: 15
+            on_press: root.delete_offer()
+        Button:
+            text: "Replace"
+            size_hint_x: 15
+            on_press: root.replace_offer()
+
+    # Define starting data and point to the ListItemButton
+    # in the Python code
+    ListView:
+        id: person_offers_list_view
+        adapter:
+            ListAdapter(data=["Hilton                100 points              $50"], cls=main.PersonOffersListButton)
+
+#<OfferBoard>:
+#    orientation: "vertical"
+#    business_name_text_input: business_name
+#    points_numeric_input: points
+#    price_numeric_input: price
+#    person_offers_list: person_offers_list_view
+#    padding: 10
+#    spacing: 10
+
+
+#user submits offer - add to offer board / remove from offer board
+#display list of offers
+#click on offer - add to process queue
